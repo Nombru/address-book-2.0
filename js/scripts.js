@@ -24,6 +24,15 @@ Address.prototype.fullAddress = function() {
   return this.street + ", " + this.city + " " + this.state;
 }
 
+// ALT2: This is an alternative way to reset all the forms using the div class "next-address".
+// function resetFields() {
+//     $("input#new-first-name").val("");
+//     $("input#new-last-name").val("");
+//     $("input.new-street").val("");
+//     $("input.new-city").val("");
+//     $("input.new-state").val("");
+// }
+
 // user interface logic
 $(document).ready(function() {
   $("#add-address").click(function() {
@@ -32,7 +41,7 @@ $(document).ready(function() {
                                   '<div class="form-group">' +
                                      '<label for="new-street">Street</label>' +
                                      '<input type="text" class="form-control new-street">' +
-                                     // ALT: possible alternative way to append the form
+                                     // ALT1: possible alternative way to append the form
                                      // '<input type="text" class="form-control new-street2">' +
                                    '</div>' +
                                    '<div class="form-group">' +
@@ -46,10 +55,9 @@ $(document).ready(function() {
                                   '</div>' +
                                 '</div>');
   });
+
   $("form#new-contact").submit(function(event) {
     event.preventDefault();
-
-    $(".next-address").remove()
 
     var inputtedFirstName = $("input#new-first-name").val();
     var inputtedLastName = $("input#new-last-name").val();
@@ -59,7 +67,7 @@ $(document).ready(function() {
 // Creating address from input information
     $(".new-address").each(function() {
       var inputtedStreet = $(this).find("input.new-street").val();
-      // ALT: possible alternative way to append form
+      // ALT1: possible alternative way to append form
       // var inputtedStreet = $("input.new-street2").val();
       var inputtedCity = $(this).find("input.new-city").val();
       var inputtedState = $(this).find("input.new-state").val();
@@ -83,6 +91,11 @@ $(document).ready(function() {
         $("ul#addresses").append("<li>" + address.fullAddress() + "</li>");
       });
     });
+    
+    // ALT2: This is an alternative way to reset all the forms using the div class "next-address".
+        // resetFields()
+        $(".next-address").remove()
+
 
     $("input#new-first-name").val("");
     $("input#new-last-name").val("");
